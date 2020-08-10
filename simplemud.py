@@ -29,13 +29,18 @@ from mudserver import MudServer
 
 # structure defining the rooms in the game. Try adding more rooms to the game!
 rooms = {
-    "Tavern": {
-        "description": "You're in a cozy tavern warmed by an open fire.",
-        "exits": {"outside": "Outside"},
+    "Stimson Tavern": {
+        "description": "You're in a cozy tavern in the small town of Stimson. You take advantage of the quiet atmosphere and get warmed by an open fire.",
+        "exits": {"outside": "Outside Stimson Tavern"},
     },
-    "Outside": {
-        "description": "You're standing outside a tavern. It's raining.",
-        "exits": {"inside": "Tavern"},
+    "Outside Stimson Tavern": {
+        "description": "You're standing outside Stimson Tavern. You enjoy the small, covered patio in front of the tavern and breathe in the cool, fresh air.",
+        "exits": {"inside": "Stimson Tavern",
+                  "path": "Stimson Tavern Path"},
+    },
+    "Stimson Tavern Path": {
+        "description": "The path in front of Stimson Tavern is worn and weathered. There is a sign that reads, 'North: Stepford <-> South: Merthrop'",
+        "exits": {"tavern": "Outside Stimson Tavern"},
     }
 }
 
@@ -103,7 +108,7 @@ while True:
         if players[id]["name"] is None:
 
             players[id]["name"] = command
-            players[id]["room"] = "Tavern"
+            players[id]["room"] = "Stimson Tavern"
 
             # go through all the players in the game
             for pid, pl in players.items():
