@@ -26,6 +26,13 @@ import time
 # import the MUD server class
 from mudserver import MudServer
 
+RED = "\033[31m"
+GREEN = "\033[32m"
+YELLOW = "\033[33m"
+BLUE = "\033[34m"
+MAGENTA = "\033[35m"
+CYAN = "\033[36m"
+WHITE = "\033[37m"
 
 # structure defining the rooms in the game. Try adding more rooms to the game!
 rooms = {
@@ -40,7 +47,17 @@ rooms = {
     },
     "Stimson Tavern Path": {
         "description": "The path in front of Stimson Tavern is worn and weathered. There is a sign that reads, 'North: Stepford <-> South: Merthrop'",
-        "exits": {"tavern": "Outside Stimson Tavern"},
+        "exits": {"tavern": "Outside Stimson Tavern",
+                  "north": "Stimson Tavern Path North",
+                  "south": "Stimson Tavern Path South"},
+    },
+    "Stimson Tavern Path North": {
+        "description": "You are on a dirt path leading north from Stimson Tavern. In front of you lies a small stream that is just big enough that it gives you hesitation jumping over it.",
+        "exits": {"south": "Stimson Tavern Path"},
+    },
+    "Stimson Tavern Path South": {
+        "description": "You are on a dirt path leading south from Stimson Tavern. The path leads to a dense forest that is dimly lit. You are on guard as you reach the forest's edge.",
+        "exits": {"north": "Stimson Tavern Path"},
     }
 }
 
@@ -174,7 +191,7 @@ while True:
                                                     ", ".join(playershere)))
 
             # send player a message containing the list of exits from this room
-            mud.send_message(id, "Exits are: {}".format(
+            mud.send_message(id, "Exits are: \033[32m{}\033[37m".format(
                                                     ", ".join(rm["exits"])))
 
         # 'go' command
